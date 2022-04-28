@@ -4,7 +4,6 @@ const path = require('path')
 const app = express();
 
 app.use(cors());
-
 app.use(express.json())
 
 var Rollbar = require('rollbar')
@@ -30,7 +29,7 @@ app.get('/test', () => {try{
   
 
 const port = process.env.PORT || 4546
-
+app.use(rollbar.errorHandler())
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
 })

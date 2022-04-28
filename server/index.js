@@ -25,12 +25,15 @@ app.get('/test', () => {try{
   banana()
 } catch(error){rollbar.error(error)}})
 
+app.get('/banana', () => {try{
+    banana()
+  } catch(error){rollbar.critical("Function does not exist")}})
+
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
 const port = process.env.PORT || 4545
 app.use(rollbar.errorHandler())
-
 app.listen(port, ()=> console.log(`Listening on ${port}`)) 
 
 

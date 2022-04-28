@@ -17,8 +17,11 @@ var rollbar = new Rollbar({
 app.get('/', (req, res) =>{
     res.sendFile(path.join(__dirname, '../index.html'))
 })
-app.get('/', (req, res) => {
+app.get('/', (req, res) => {try{
     res.sendFile(path.join(__dirname,'../styles.css'))
+}
+catch(error){rollbar.warning("CSS doesn't exist")}
+    
 })
 
 app.get('/test', () => {try{

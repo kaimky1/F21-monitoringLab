@@ -31,3 +31,9 @@ app.get('/', (req,res) => {
 // //     }
 
 // // })
+
+const port = process.env.PORT || 4546
+
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`)
+})

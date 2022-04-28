@@ -3,6 +3,8 @@ const path = require('path')
 
 const app = express();
 
+app.use(cors());
+
 app.use(express.json())
 
 var Rollbar = require('rollbar')
@@ -15,22 +17,17 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
+app.use(express.json()); // When we want to be able to accept JSON.
+
 app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, '../index.html'))
     rollbar.info('html file served successfully.')
 })
 
-// app.post('/api/student', (req, res)=>{
-// //     let {name} = req.body
-   
-// //     try{
-// //         myRoutine();
-// //     } catch (e) {
-        
-// //         logmyErrors(e);
-// //     }
-
-// // })
+app.get('/test', () => {try{
+    banana()
+} catch(error){rollbar.error(error)}})
+  
 
 const port = process.env.PORT || 4546
 
